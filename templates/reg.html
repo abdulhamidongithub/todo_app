@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+    <h1>Registration form</h1>
+    <form action="{% url 'reg' %}" method="post">{% csrf_token %}
+        <input type="text" name="login" placeholder="Login"/>
+        <br>
+        <input type="password" name="parol" placeholder="Parol"/>
+        <br>
+        <input type="password" name="parol2" placeholder="Parolni tasdiqlang"/>
+        <br>
+        <button type="submit">Ro'yhatdan o'tish</button>
+    </form>
+</body>
+</html>

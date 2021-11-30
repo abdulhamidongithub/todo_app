@@ -1,0 +1,96 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--style-->
+  <style>
+  .card {
+
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
+               0 6px 20px 0 rgba(0,0,0,0.39);
+   background: DarkOrange;
+   margin-bottom : 5%;
+   border-radius: 25px;
+   padding : 2%;
+   overflow: auto;
+   resize: both;
+   text-overflow: ellipsis;
+  }
+  .card:hover{
+    background: lightblue;
+  }
+
+  .submit_form{
+
+    text-align: center;
+    padding: 3%;
+    background: DarkOrange;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
+                0 6px 20px 0 rgba(0,0,0,0.36);
+  }
+  </style>
+
+</head>
+
+<body  class="container-fluid">
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-info">
+    <strong>{{message}}</strong>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <center class="row">
+    <h1><i>Kundalik ishlar</i></h1>  <a href="{% url 'logout' %}"><button>Logout</button></a>
+    <hr />
+  </center>
+
+  <div class="row">
+
+    <div class="col-md-8">
+
+      {% for todo in todo_list %}
+      <div class="card">
+        <center><b>{{todo.title}}</b></center>
+        <hr/>
+        {{todo.time}}
+        <hr/>
+        {{todo.description}}
+        <br />
+        <br />
+        <form action="/del/{{todo.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+          {% csrf_token %}
+          <button value="remove" type="submit"  class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span> &nbsp; remove</button>
+        </form>
+      </div>
+      {% endfor%}
+    </div>
+    <div class="col-md-1"> </div>
+    <div class="col-md-3" >
+      <div  class="submit_form">
+      <form action="{% url 'all-todos' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="t" placeholder="Title" />
+        <input type="text" name="d" placeholder="Description" />
+        <input type="text" name="s" placeholder="Status" />
+        <center>
+        <input type="submit" class="btn btn-default" value="Topshir" />
+      </center>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

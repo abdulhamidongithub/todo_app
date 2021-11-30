@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <form action="{% url 'login' %}" method="post">{% csrf_token %}
+        <input type="text" name="login" placeholder="Login"/>
+        <br>
+        <input type="password" name="parol" placeholder="Parol"/>
+        <br>
+         <br>
+        <button type="submit">Kirish</button>
+        <a href="/reg/"><button type="button">Ro'yhatdan o'tish</button></a>
+    </form>
+</body>
+</html>
